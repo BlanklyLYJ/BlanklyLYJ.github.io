@@ -1,5 +1,5 @@
 ---
-title: 关于
+title: 友链
 date: 2024-04-08 14:03:38
-type: "about"
+type: "link"
 ---
