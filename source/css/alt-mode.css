@@ -1,0 +1,204 @@
+/**
+ * alt-mode:暗黑 + 粉/紫点缀
+ *
+ * 只在 <html>.alt-mode 时生效。
+ * 默认(light)完全不应用任何样式。
+ */
+
+html.alt-mode {
+  --alt-bg:        #1a1024;
+  --alt-bg-soft:   #2d1b3d;
+  --alt-card:      #251632;
+  --alt-text:      #e8d5f0;
+  --alt-text-soft: #b29ac0;
+  --alt-pink:      #ff6bcb;
+  --alt-purple:    #b97aff;
+  --alt-border:    #3d2949;
+}
+
+html.alt_mode body,
+html.alt-mode body {
+  background: var(--alt-bg) !important;
+  color: var(--alt-text) !important;
+}
+
+/* 全站背景层 */
+html.alt-mode #web_bg {
+  background:
+    radial-gradient(ellipse at 20% 0%, rgba(255, 107, 203, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 100%, rgba(185, 122, 255, 0.15) 0%, transparent 50%),
+    linear-gradient(135deg, var(--alt-bg) 0%, var(--alt-bg-soft) 100%) !important;
+  background-attachment: fixed !important;
+}
+
+/* 主标题 / 链接用粉紫 */
+html.alt-mode a,
+html.alt-mode .article-title,
+html.alt-mode .post-title,
+html.alt-mode h1,
+html.alt-mode h2,
+html.alt-mode h3,
+html.alt-mode h4 {
+  color: var(--alt-pink) !important;
+}
+
+html.alt-mode a:hover {
+  color: var(--alt-purple) !important;
+}
+
+/* 顶部导航栏 */
+html.alt-mode #nav,
+html.alt-mode .nav-fixed {
+  background: rgba(26, 16, 36, 0.92) !important;
+  backdrop-filter: blur(8px);
+}
+
+/* 文章卡片 / 主体容器 */
+html.alt-mode #content-inner,
+html.alt-mode #post,
+html.alt-mode #page,
+html.alt-mode #article-container,
+html.alt-mode .recent-post-item,
+html.alt-mode .post-content {
+  background: transparent !important;
+  color: var(--alt-text) !important;
+}
+
+/* 实体卡片暗紫底(recent-post / 文章外层 wrap) */
+html.alt-mode .recent-post-item,
+html.alt-mode #post > #article-container,
+html.alt-mode .post-content {
+  background: var(--alt-card) !important;
+}
+
+/* 侧栏卡片 */
+html.alt-mode .aside-content,
+html.alt-mode .card-widget,
+html.alt-mode .sticky_layout {
+  background: var(--alt-card) !important;
+  color: var(--alt-text) !important;
+  border: 1px solid var(--alt-border) !important;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3) !important;
+}
+
+html.alt-mode .card-widget .item-headline,
+html.alt-mode .card-widget .author-info__name,
+html.alt-mode .card-widget .headline,
+html.alt-mode .card-widget .item-name {
+  color: var(--alt-pink) !important;
+}
+
+html.alt-mode .card-widget .author-info__description,
+html.alt-mode .card-widget .announcement_content,
+html.alt-mode .card-widget .item-count {
+  color: var(--alt-text-soft) !important;
+}
+
+html.alt-mode #card-info-btn {
+  background: linear-gradient(135deg, var(--alt-pink) 0%, var(--alt-purple) 100%) !important;
+  color: #fff !important;
+}
+
+/* 底部翻页 banner(pagination-post) */
+html.alt-mode #pagination.pagination-post {
+  background: var(--alt-bg-soft) !important;
+  border-top: 2px solid var(--alt-pink) !important;
+}
+
+html.alt-mode #pagination .prev_info,
+html.alt-mode #pagination .next_info,
+html.alt-mode #pagination .prev-post .label,
+html.alt-mode #pagination .next-post .label {
+  color: var(--alt-text) !important;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8) !important;
+}
+
+/* 文章正文 */
+html.alt-mode .post-content p,
+html.alt-mode .post-content li {
+  color: var(--alt-text) !important;
+}
+
+/* 代码块 */
+html.alt-mode pre,
+html.alt-mode code,
+html.alt-mode .highlight {
+  background: #0f0817 !important;
+  color: #e8d5f0 !important;
+  border: 1px solid var(--alt-border) !important;
+}
+
+html.alt-mode .highlight .keyword,
+html.alt-mode .highlight .built_in {
+  color: var(--alt-pink) !important;
+}
+
+html.alt-mode .highlight .string {
+  color: #c795f0 !important;
+}
+
+html.alt-mode .highlight .comment {
+  color: #7a6387 !important;
+  font-style: italic;
+}
+
+/* 表格 */
+html.alt-mode table th {
+  background: var(--alt-bg-soft) !important;
+  color: var(--alt-pink) !important;
+  border-color: var(--alt-border) !important;
+}
+
+html.alt-mode table td {
+  border-color: var(--alt-border) !important;
+  color: var(--alt-text) !important;
+}
+
+html.alt-mode table tr:nth-child(2n) {
+  background: rgba(255, 107, 203, 0.04) !important;
+}
+
+/* 引用块 */
+html.alt-mode blockquote {
+  border-left: 4px solid var(--alt-pink) !important;
+  background: rgba(255, 107, 203, 0.06) !important;
+  color: var(--alt-text-soft) !important;
+}
+
+/* 边框通用 */
+html.alt-mode .recent-post-item,
+html.alt-mode .article-container {
+  border: 1px solid var(--alt-border) !important;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* 页脚 */
+html.alt-mode #footer {
+  background: var(--alt-bg-soft) !important;
+  color: var(--alt-text-soft) !important;
+}
+
+/* 滚动条 */
+html.alt-mode ::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+html.alt-mode ::-webkit-scrollbar-track {
+  background: var(--alt-bg);
+}
+
+html.alt-mode ::-webkit-scrollbar-thumb {
+  background: var(--alt-purple);
+  border-radius: 5px;
+}
+
+html.alt-mode ::-webkit-scrollbar-thumb:hover {
+  background: var(--alt-pink);
+}
+
+/* 选中文本 */
+html.alt-mode ::selection {
+  background: var(--alt-pink);
+  color: #fff;
+}

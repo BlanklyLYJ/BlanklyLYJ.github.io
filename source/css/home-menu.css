@@ -1,0 +1,219 @@
+/**
+ * 主页菜单卡片样式
+ * 只作用在主页(/),不影响其他页面
+ */
+
+/* 仅主页的 page-body 应用 */
+#home-menu,
+.home-menu {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 24px 80px;
+}
+
+/* Hero 区 */
+.home-menu__hero {
+  text-align: center;
+  margin-bottom: 56px;
+  padding: 60px 20px 40px;
+}
+
+.home-menu__title {
+  font-size: 56px;
+  font-weight: 700;
+  margin: 0 0 12px;
+  color: #2c3e50;
+  letter-spacing: -1px;
+}
+
+.home-menu__subtitle {
+  font-size: 16px;
+  color: #7a8895;
+  margin: 0;
+  letter-spacing: 0.5px;
+}
+
+/* 卡片网格 */
+.home-menu__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+  margin-bottom: 64px;
+}
+
+.home-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 24px 22px;
+  background: #fff;
+  border: 1px solid #e6ebf0;
+  border-radius: 12px;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.25s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.home-card:hover {
+  transform: translateY(-3px);
+  border-color: #88aacc;
+  box-shadow: 0 6px 20px rgba(91, 140, 201, 0.15);
+  text-decoration: none;
+}
+
+.home-card--primary {
+  background: linear-gradient(135deg, #fff 0%, #f0f6fb 100%);
+  border-color: #c5dcee;
+}
+
+.home-card__icon {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  color: #5b8cc9;
+  background: #eef4fb;
+  border-radius: 10px;
+}
+
+.home-card--primary .home-card__icon {
+  background: linear-gradient(135deg, #6ea4d8 0%, #88aacc 100%);
+  color: #fff;
+}
+
+.home-card__title {
+  font-size: 17px;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 4px;
+}
+
+.home-card__desc {
+  font-size: 13px;
+  color: #7a8895;
+  line-height: 1.5;
+}
+
+/* 系列文章段 */
+.home-menu__series {
+  padding: 32px 28px;
+  background: #f8fafc;
+  border-radius: 12px;
+  border-left: 4px solid #88aacc;
+}
+
+.home-menu__series h2 {
+  margin: 0 0 16px;
+  font-size: 22px;
+  color: #2c3e50;
+}
+
+.home-menu__series ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.home-menu__series li {
+  padding: 8px 0;
+  font-size: 15px;
+}
+
+.home-menu__series a {
+  color: #5b8cc9;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.home-menu__series a:hover {
+  text-decoration: underline;
+}
+
+.home-menu__hint {
+  margin: 16px 0 0;
+  font-size: 13px;
+  color: #999;
+  font-style: italic;
+}
+
+/* ============= alt-mode 配色 ============= */
+html.alt-mode .home-menu__title {
+  background: linear-gradient(135deg, #ff6bcb 0%, #b97aff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+html.alt-mode .home-menu__subtitle {
+  color: #b29ac0;
+}
+
+html.alt-mode .home-card {
+  background: #251632;
+  border-color: #3d2949;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+html.alt-mode .home-card:hover {
+  border-color: #ff6bcb;
+  box-shadow: 0 6px 20px rgba(255, 107, 203, 0.25);
+}
+
+html.alt-mode .home-card--primary {
+  background: linear-gradient(135deg, #251632 0%, #2d1838 100%);
+  border-color: #5a2e4a;
+}
+
+html.alt-mode .home-card__icon {
+  background: #2d1838;
+  color: #ff6bcb;
+}
+
+html.alt-mode .home-card__title {
+  color: #e8d5f0;
+}
+
+html.alt-mode .home-card__desc {
+  color: #9985a8;
+}
+
+html.alt-mode .home-menu__series {
+  background: #251632;
+  border-left-color: #ff6bcb;
+}
+
+html.alt-mode .home-menu__series h2 {
+  color: #e8d5f0;
+}
+
+html.alt-mode .home-menu__hint {
+  color: #7a6387;
+}
+
+/* 移动端 */
+@media (max-width: 640px) {
+  .home-menu {
+    padding: 24px 16px 60px;
+  }
+
+  .home-menu__hero {
+    padding: 30px 10px 20px;
+    margin-bottom: 32px;
+  }
+
+  .home-menu__title {
+    font-size: 40px;
+  }
+
+  .home-menu__subtitle {
+    font-size: 14px;
+  }
+
+  .home-card {
+    padding: 18px 16px;
+  }
+}
