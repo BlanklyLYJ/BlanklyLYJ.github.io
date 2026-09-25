@@ -89,10 +89,10 @@ cover:
   position: both
   # When cover is not set, the default cover is displayed (當沒有設置cover時，默認的封面顯示)
   default_cover:
-     - /img/bg/default1.png
-     - /img/bg/default2.png
-     - /img/bg/default3.png
-     - /img/bg/default4.png
+     - /img/bg/safe/0ad64580c203a387.webp
+     - /img/bg/safe/2294d6b2af06149a.webp
+     - /img/bg/safe/3957bfdf5c87c2e3.webp
+     - /img/bg/safe/4e826fb21e02cb01.webp
 
 # Replace Broken Images (替換無法顯示的圖片)
 error_img:
