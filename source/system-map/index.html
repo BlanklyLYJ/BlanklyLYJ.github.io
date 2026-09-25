@@ -1,0 +1,419 @@
+---
+skip_render: true
+---
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>《维尔德拉斯传说》系统关联图(域分组 · 点击下钻)</title>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+<style>
+  body { margin: 0; background: #1a1c22; font-family: "Microsoft YaHei", sans-serif; }
+  #chart { width: 100vw; height: 100vh; }
+  #topbar { position: fixed; top: 0; left: 0; right: 0; height: 52px; background: #23262ecc;
+            border-bottom: 1px solid #3a3f4b; display: flex; align-items: center; gap: 16px;
+            padding: 0 20px; z-index: 9; }
+  #topbar h1 { font-size: 16px; color: #eee; margin: 0; font-weight: 600; }
+  #breadcrumb { font-size: 13px; color: #9aa; }
+  #breadcrumb b { color: #ffd479; }
+  #backBtn { display: none; cursor: pointer; background: #3a3f4b; color: #eee; border: none;
+             border-radius: 6px; padding: 6px 14px; font-size: 13px; }
+  #backBtn:hover { background: #4a5060; }
+  #allBtn { cursor: pointer; background: #3a3f4b; color: #eee; border: none;
+            border-radius: 6px; padding: 6px 14px; font-size: 13px; }
+  #allBtn:hover { background: #4a5060; }
+  #detail { position: fixed; top: 64px; right: 20px; max-width: 380px; background: #23262e;
+            border: 1px solid #3a3f4b; border-radius: 8px; padding: 12px 16px; color: #cdd;
+            font-size: 13px; display: none; z-index: 9; max-height: 80vh; overflow-y: auto; }
+  #detail b { color: #ffd479; }
+  #detail .close { float: right; cursor: pointer; color: #889; }
+  #hint { position: fixed; bottom: 14px; left: 20px; color: #778; font-size: 12px; z-index: 9; }
+</style>
+</head>
+<body>
+<div id="topbar">
+  <h1>《维尔德拉斯传说》系统关联图</h1>
+  <span id="breadcrumb">总览 · 7 域 44 系统</span>
+  <button id="backBtn" onclick="showOverview()">← 返回总览</button>
+  <button id="allBtn" onclick="toggleAll()">⊘ 全展开</button>
+</div>
+<div id="detail"><span class="close" onclick="this.parentElement.style.display='none'">✕</span><div id="detailBody"></div></div>
+<div id="chart"></div>
+<div id="hint">总览:点击域组下钻 ——— 详情:左键点系统=打开策划案(需博客本地预览开着) · 点灰色外部节点=跳转其所在域 · 双击系统=看上下游明细 · 悬停边看关系说明</div>
+<script>
+// ===== 域定义 =====
+const DOMAINS = {
+  econ:   { name: '经济域', color: '#f39c12' },
+  ai:     { name: 'AI域',   color: '#16a085' },
+  story:  { name: '叙事域', color: '#3498db' },
+  grow:   { name: '养成域', color: '#9b59b6' },
+  battle: { name: '战斗域', color: '#e74c3c' },
+  world:  { name: '世界域', color: '#27ae60' },
+  infra:  { name: '支撑域', color: '#7f8c8d' },
+};
+const DOMAIN_KEYS = Object.keys(DOMAINS);
+const DOM_OF = {};
+// 节点: [编号, 名称, 域, 状态, 一句话定位]
+const N = [
+['01','背包与装备','econ','✅','物品进出的唯一通道:双轨存储(堆叠+装备实例),穿戴不占格'],
+['02','烹饪与食物','econ','🔄M1','生存循环收尾:火边烹饪+限时六维Buff,槽位借修改器当真源'],
+['03','GOAP慎思AI','ai','✅','城镇NPC的长线决策:目标-规划-执行,经济真实影响NPC决策'],
+['04','剧情系统','story','✅','场景卡JSON+WorldState+12谓词源条件引擎+打听式任务+DC检定'],
+['05','属性系统','grow','✅','全项目数值中枢:Base/Current分离,三Op结算,任何实体是宿主'],
+['06','战斗生命周期','battle','✅','探索⇄战斗总开关:网格生长演出+战前就位(先Snap后放回)'],
+['07','ATB行动值','battle','✅','半实时行动权:速度变可操纵资源(蓄力/疾风/泥沼三指令)'],
+['08','六边形网格','battle','✅','战棋空间底座:凸包现场生成+高度差邻接墙+动态扩展'],
+['09','探索动作层','battle','✅','手感五件套:近战/翻滚/格挡/潜行/顿帧,单点结算'],
+['10','实时接战','battle','🔄M1','形态C:不切相位的贴身对抗,节拍对拼+移动即闪避+疲劳'],
+['11','招架','battle','⏸','独立第四指令:入场费模式+克制矩阵+投技(设计讨论中)'],
+['12','撤退与战败','battle','📋','失败系统:撤退是资源,战术失败≠战略失败(提案待审)'],
+['13','联机配合','battle','📋','三层金字塔:走位连锁→状态组合→羁绊合体+意图Duel(提案)'],
+['14','熟练度','grow','✅','用进废退的武器/技能经验:阈值Lv×100+100'],
+['15','职业系统','grow','✅','多职业解锁+升级,周目继承;玩法权限愿景待铺'],
+['16','信仰池','grow','✅','低魔施法资源:睡觉/圣餐/祈祷恢复,世界观写进数值循环'],
+['17','主动技能','grow','✅M2','信仰资源制+冷却制混合定价,槽/册/未习得三态,TryCast五步守卫'],
+['18','装备词缀','grow','✅M2','D2式随机build:位数映射稀有度,实例制承载,落地瞬间roll'],
+['19','阵营九宫格','grow','✅','守序混乱×善恶双轴,±30分档,行为塑造角色'],
+['20','密教组织','grow','✅','七神各一密教:虔诚晋升50/200/500/1000+密教任务(骨架)'],
+['21','好感度','grow','✅','六档关系→交易倍率0.7-1.5x+羁绊合体门控,一份数据两种消费'],
+['22','多周目NG+','grow','✅','难度1+0.3(Cycle-1)+白名单继承;七神视角是长线钩子'],
+['23','合成系统','econ','✅','表驱动配方底座:站点校验+85%成功率+失败产物生态'],
+['24','掉落与拾取','econ','✅','时机确定内容随机:金币/物品双槽互不挤占,磁吸零按键'],
+['25','商人经济','econ','✅','金币回收三件套:价差/资金池300/3日补货,声望折扣可见'],
+['26','时间系统','world','✅','全项目第一枢纽:连续流动,一切重生/补货/冷却的唯一时钟'],
+['27','昼夜与关卡','world','✅','时段→四阶段光照渐变;LevelState九态+Pending下一帧提交'],
+['28','遭遇重生','world','✅','个体遭遇按游戏日回填:唯一判定函数,玩家在场冻结'],
+['29','声望双轨','world','✅M1','Fame/Infamy不抵消,属性宿主零新组件,段位派生'],
+['30','随机事件','world','✅M1','数据驱动事件池:可见因果>背景模拟,空事件也是事件'],
+['31','营地休息','world','✅M1','快进+全恢复+唯一存档点三位一体;夜间活动提案待审'],
+['32','大地图与POI','world','📋','无缝≠流送:1.5km单地形+POI近距流式激活(提案待审)'],
+['33','快旅与小地图','world','⏸/🔬','节点制快旅(先发现后旅行)+自绘小地图,依赖大地图'],
+['34','世界魔力','world','✅','World.Magic七阶段:低魔复苏时钟,七视角周目的地基'],
+['35','交互与教程','story','✅','E键世界入口:0.3s起手统一节律,五类型分发;教程框架就绪'],
+['36','怪物FSM','ai','✅','仇恨/拴绳/分离三态:目标池含同伴,受击即仇恨'],
+['37','同伴跟随','ai','✅','槽位steering+Stance三档(角色卡驱动)+倒地扶起'],
+['38','输入操控','infra','✅','采集/缓冲/上下文门控三层,只写本地玩家'],
+['39','UIFrame','infra','✅','五层结构+面板池+全运行时构建路线,UI不ECS化'],
+['40','存档系统','infra','✅','软硬档分离+实体快照,恢复走完整流程不写终态'],
+['41','音效体系','infra','✅M1','程序合成零资产冷启动,统一结算口接线,扇出为零'],
+['42','网络联机','infra','✅','20Hz主机权威+输入验证+局部预测回滚,自建传输层'],
+['43','Mod×联机','infra','📋','三层分离同步:Component/配置/资源+Workshop+兜底(提案)'],
+['44','Tag与资源','infra','✅','层级标签(管线并发地基)+VDSFrameWork+配置表$引用'],
+];
+N.forEach(([id,,dom]) => DOM_OF[id] = dom);
+// 边: [源, 目标, 类型, 说明]  dep依赖/con消费/loop联动/gate门控
+const E = [
+['24','01','dep','掉落磁吸入包,物品主水源'],['04','01','dep','剧情ItemOps对话引起背包变动'],
+['01','18','con','装备实例轨承载词缀'],['01','02','con','烹饪扣材料给产物'],
+['01','25','con','交易扣款给货(金币=物品200)'],['01','04','con','item/gold谓词源'],
+['24','02','dep','食材来自怪掉落表'],['35','02','dep','营火Camp交互入口'],
+['23','02','dep','CraftSystem是烹饪底座'],['02','05','con','食物Buff=属性修改器'],
+['02','16','con','圣餐FaithRestore'],['02','30','loop','OnCamp宴席事件(M3)'],
+['04','03','dep','条件引擎配置化谓词(PredicateBindings)'],['25','03','dep','实时药价进L2成本'],
+['03','04','con','flag谓词源反读NPC内心'],['03','25','loop','NPC真实交易影响资金池'],
+['04','29','con','AttrDelta写声望'],['30','04','dep','事件卡复用场景卡管线(SceneId)'],
+['18','05','dep','词缀走属性修改器'],['02','05','dep','食物Buff挂修改器'],
+['17','05','dep','技能Buff挂修改器'],['05','07','con','ATB速度=Dex×10+Phy×2+50'],
+['05','09','con','攻防公式Phy×2+5/Phy×1.5'],['05','04','con','attr谓词源+检定调整值'],
+['29','05','loop','声望=属性宿主(Rep.*命名空间)'],['34','05','loop','世界魔力也是属性宿主'],
+['28','06','dep','遭遇ACTIVE触发开战'],['36','06','dep','贴身仇恨即开战(接战入口)'],
+['06','24','con','BattleEndEvent掉落结算'],['06','28','con','胜利写CLEARED'],
+['05','07','dep','速度公式消费Dex/Phy'],['16','07','dep','疾风20/泥沼30信仰'],
+['07','13','loop','羁绊合体复用ATB接龙结构'],['08','17','con','技能形状Single/Burst/Cross…'],
+['38','09','dep','空格/右键/C直读'],['09','41','con','DamageSystem统一结算口接线'],
+['09','10','con','格挡/翻滚/移动闪避全复用'],['09','36','loop','潜行可见度调制仇恨半径'],
+['08','10','dep','走格移动复用六角格'],['10','42','con','伤害走DamageRequest主机权威'],
+['10','11','loop','疲劳是招架反击的阀门'],['36','10','dep','仇恨开战触发接战'],
+['06','12','dep','EndReason三态挂EndBattle'],['28','12','loop','撤退保持ACTIVE可再触发'],
+['16','12','dep','战败扣信仰10%(提案)'],['21','13','dep','默契=合体门槛+窗口时长'],
+['44','13','dep','L2状态组合查标签'],['42','13','dep','M4联机接通(可靠事件)'],
+['06','14','dep','战棋胜利发经验'],['14','05','loop','Weapon.Prof.*熟练度属性域'],
+['15','22','con','职业进CarryOverFlags继承'],['16','17','con','技能消耗信仰15-40/次'],
+['35','17','dep','技能槽3由任务解锁'],['17','09','con','技能伤害走ApplyAttack单源'],
+['24','18','dep','掉落落地瞬间roll词缀'],['01','18','dep','实例制背包是词缀前提'],
+['18','25','loop','词缀影响卖价(M3)'],['04','19','dep','阵营AttrDelta通道'],
+['19','20','loop','神对alignment有偏好'],['19','22','loop','POV视角过滤'],
+['16','20','dep','信仰世界观同源'],['20','22','loop','七神密教×七视角周目'],
+['04','21','dep','剧情写好感变动'],['21','25','con','交易倍率0.7-1.5x(M2接线)'],
+['21','13','con','羁绊合体L3门控'],['40','22','dep','Cycle周目数入档'],
+['22','06','con','难度倍率1+0.3(Cycle-1)'],['22','28','con','区域难度递增(M3)'],
+['44','23','dep','TBRecipe表驱动配方'],['23','18','loop','锻造台crafted词缀(M3)'],
+['06','24','dep','UnitDeathEvent战棋掉落'],['24','25','con','战利品→金币货源'],
+['29','25','dep','段位折扣0.1-0.3'],['26','25','dep','3游戏日补货周期'],
+['25','03','loop','药价上涨→NPC改硬扛'],['26','27','dep','Hour映射光照阶段'],
+['26','25','dep','Day驱动补货'],['26','28','dep','Day驱动重生回填'],
+['26','30','dep','CooldownDays/MinDay'],['26','31','dep','快进+窗口判定'],
+['26','04','con','time谓词源Hour in 20-5'],['27','31','loop','睡觉窗口20:00-06:00'],
+['06','28','dep','战斗写ClearedDay'],['28','04','con','kill任务死档自愈'],
+['04','29','dep','剧情AttrDelta写声望'],['29','25','con','折扣要看得见(重算)'],
+['04','30','dep','事件卡Conditions门控'],['31','30','dep','OnSleep/OnWake挂点'],
+['31','40','dep','睡觉=唯一存档点slot_auto'],['31','16','con','睡觉≥6h回满信仰'],
+['31','33','loop','快旅复用快进管线'],['32','33','dep','POI真源是快旅/小地图前置'],
+['32','04','con','loc谓词距地标米数'],['26','34','dep','按Day写魔力阶段'],
+['34','31','gate','梦境卡按Phase门控(提案)'],['34','22','loop','七阶段↔七视角'],
+['38','35','dep','E键Confirm触发检测'],['35','04','con','Talk触发场景卡'],
+['35','25','con','Shop开店压栈'],['35','31','con','Camp营火面板'],
+['35','02','con','Camp分支开烹饪面板'],['35','04','con','InteractCompletedEvent任务talk'],
+['09','36','loop','潜行可见度0.3/0.6/1.0调制仇恨'],['36','37','loop','目标池=玩家+同伴取最近'],
+['05','37','dep','角色卡Stance/六维桥接'],['37','40','con','同伴快照入档'],
+['37','31','con','同场同伴睡觉恢复'],['37','04','con','party谓词源party:Viktor'],
+['38','09','con','动作消费'],['38','06','con','战棋鼠标点选'],['38','42','con','本地玩家输入是联机数据源'],
+['44','06','dep','tag区分管线并发(战斗期世界系统)'],['44','13','con','L2组合标签走现有同步'],
+['42','43','dep','可靠传输承载Mod配置'],['44','43','dep','AssetResolver三级降级'],
+['44','25','dep','TBItem.Price基价唯一真源'],['44','23','con','$Item[]跨表引用'],
+['44','01','dep','五表驱动物品/装备数据'],['44','02','con','TBRecipe配方表'],
+['40','01','dep','背包+装备槽+金币入档'],['40','17','con','技能槽+册入档'],
+['40','25','con','货架/资金池/补货日随档'],['40','37','con','同伴快照(软档)'],
+['40','28','con','Enc_*重生变量(硬档)'],['41','09','con','探索相位接DamageSystem同点'],
+['41','24','con','loot/pickup音+飘字同点'],['41','02','con','cooking/eat生活族音色'],
+['44','38','con','输入上下文白名单'],['39','01','con','InventoryChangedEvent驱动面板刷新'],
+];
+
+const LINK_TYPES = {
+  dep:  { name: '依赖', color: '#8e9aaf' },
+  con:  { name: '消费', color: '#4aa3df' },
+  loop: { name: '联动', color: '#f39c12' },
+  gate: { name: '门控', color: '#e74c3c' },
+};
+const STATUS_COLOR = { '✅':'#2ecc71', '🔄M1':'#f1c40f', '🔄M2':'#f1c40f', '📋':'#e67e22', '⏸':'#e67e22', '⏸/🔬':'#e67e22', '🔬':'#e67e22' };
+const nodeOf = id => N.find(x => x[0] === id);
+const idName = id => { const n = nodeOf(id); return n ? n[1] : id; };
+// 博客站点版(同源相对路径,本地预览/线上通用);
+// file:// 直接打开本文件时回落本地预览 http://localhost:4000(博客没开改这里)
+const BLOG_BASE = location.protocol === 'file:' ? 'http://localhost:4000' : '';
+// 系统编号 → 文章真实 permalink(与各篇 frontmatter 的 permalink 字段保持一致)
+const POST_URLS = {
+  '01': '/2026/09/25/system-breakdown-01-inventory-and-equipment/',
+  '02': '/2026/09/25/system-breakdown-02-cooking-and-food/',
+  '03': '/2026/09/25/system-breakdown-03-goap-deliberative-ai/',
+  '04': '/2026/09/25/system-breakdown-04-story-system/',
+  '05': '/2026/09/25/system-breakdown-05-attribute-system/',
+  '06': '/2026/09/25/system-breakdown-06-battle-lifecycle/',
+  '07': '/2026/09/25/system-breakdown-07-atb-action-value/',
+  '08': '/2026/09/25/system-breakdown-08-hex-grid/',
+  '09': '/2026/09/25/system-breakdown-09-exploration-action-layer/',
+  '10': '/2026/09/25/system-breakdown-10-real-time-engagement/',
+  '11': '/2026/09/25/system-breakdown-11-parry/',
+  '12': '/2026/09/25/system-breakdown-12-retreat-and-defeat/',
+  '13': '/2026/09/25/system-breakdown-13-multiplayer-cooperation/',
+  '14': '/2026/09/25/system-breakdown-14-proficiency/',
+  '15': '/2026/09/25/system-breakdown-15-career-system/',
+  '16': '/2026/09/25/system-breakdown-16-faith-pool/',
+  '17': '/2026/09/25/system-breakdown-17-active-skills/',
+  '18': '/2026/09/25/system-breakdown-18-equipment-affixes/',
+  '19': '/2026/09/25/system-breakdown-19-alignment-grid/',
+  '20': '/2026/09/25/system-breakdown-20-cult-organization/',
+  '21': '/2026/09/25/system-breakdown-21-affinity/',
+  '22': '/2026/09/25/system-breakdown-22-new-game-plus/',
+  '23': '/2026/09/25/system-breakdown-23-crafting-system/',
+  '24': '/2026/09/25/system-breakdown-24-drop-and-pickup/',
+  '25': '/2026/09/25/system-breakdown-25-merchant-economy/',
+  '26': '/2026/09/25/system-breakdown-26-time-system/',
+  '27': '/2026/09/25/system-breakdown-27-day-night-and-levels/',
+  '28': '/2026/09/25/system-breakdown-28-encounter-respawn/',
+  '29': '/2026/09/25/system-breakdown-29-reputation-dual-track/',
+  '30': '/2026/09/25/system-breakdown-30-random-events/',
+  '31': '/2026/09/25/system-breakdown-31-camp-rest/',
+  '32': '/2026/09/25/system-breakdown-32-world-map-and-poi/',
+  '33': '/2026/09/25/system-breakdown-33-fast-travel-and-minimap/',
+  '34': '/2026/09/25/system-breakdown-34-world-magic/',
+  '35': '/2026/09/25/system-breakdown-35-interaction-and-tutorial/',
+  '36': '/2026/09/25/system-breakdown-36-monster-fsm/',
+  '37': '/2026/09/25/system-breakdown-37-companion-follow/',
+  '38': '/2026/09/25/system-breakdown-38-input-control/',
+  '39': '/2026/09/25/system-breakdown-39-uiframe/',
+  '40': '/2026/09/25/system-breakdown-40-save-system/',
+  '41': '/2026/09/25/system-breakdown-41-audio-system/',
+  '42': '/2026/09/25/system-breakdown-42-network-multiplayer/',
+  '43': '/2026/09/25/system-breakdown-43-mod-and-multiplayer/',
+  '44': '/2026/09/25/system-breakdown-44-gameplaytag-and-assets/',
+};
+const postUrl = id => BLOG_BASE + (POST_URLS[id] || '/');
+
+// ===== 聚合组间边 =====
+function groupEdges() {
+  const map = {};
+  for (const [s, t, ty, desc] of E) {
+    const gs = DOM_OF[s], gt = DOM_OF[t];
+    if (gs === gt) continue;
+    const key = [gs, gt].sort().join('|');
+    (map[key] = map[key] || []).push([s, t, ty, desc]);
+  }
+  return Object.entries(map).map(([key, list]) => {
+    const [a, b] = key.split('|');
+    return { source: a, target: b, list, count: list.length };
+  });
+}
+
+// ===== 总览视图 =====
+function overviewOption() {
+  const gnodes = DOMAIN_KEYS.map(k => {
+    const members = N.filter(n => n[2] === k);
+    const pending = members.filter(n => n[3] !== '✅').length;
+    return {
+      id: k, name: `${DOMAINS[k].name}\n${members.length} 系统${pending ? ` · ${pending} 待定稿` : ''}`,
+      symbol: 'roundRect', symbolSize: [118, 66],
+      itemStyle: { color: DOMAINS[k].color + '33', borderColor: DOMAINS[k].color, borderWidth: 2.5 },
+      label: { show: true, color: '#eee', fontSize: 14, fontWeight: 600 },
+      tooltip: { formatter: () => `<b>${DOMAINS[k].name}</b> · ${members.length} 系统<br>` +
+        members.map(m => `${m[3]} ${m[0]} ${m[1]}`).join('<br>') + '<br><i style="color:#8aa">点击进入域详情</i>' },
+    };
+  });
+  const glinks = groupEdges().map(g => ({
+    source: g.source, target: g.target,
+    lineStyle: { color: '#667', width: Math.min(1.5 + g.count * 0.55, 7), curveness: 0.12, opacity: 0.6 },
+    label: { show: g.count >= 3, formatter: String(g.count), color: '#aab', fontSize: 11 },
+    tooltip: { formatter: () => `<b>${DOMAINS[g.source].name} ⇄ ${DOMAINS[g.target].name}</b> · ${g.count} 条关系<br>` +
+      g.list.map(([s, t, ty, d]) => `<span style="color:${LINK_TYPES[ty].color}">[${LINK_TYPES[ty].name}]</span> ${idName(s)} → ${idName(t)}:${d}`).join('<br>') },
+  }));
+  return {
+    backgroundColor: '#1a1c22',
+    tooltip: { confine: true, backgroundColor: '#23262e', borderColor: '#3a3f4b', textStyle: { color: '#cdd', fontSize: 12 } },
+    series: [{
+      type: 'graph', layout: 'force', roam: true,
+      nodes: gnodes, links: glinks,
+      force: { repulsion: 900, edgeLength: 220, gravity: 0.15 },
+      emphasis: { focus: 'adjacency' },
+      scaleLimit: { min: 0.5, max: 3 },
+    }],
+  };
+}
+
+// ===== 域详情视图 =====
+function groupOption(domKey) {
+  const inner = N.filter(n => n[2] === domKey).map(([id, name, dom, st, desc]) => ({
+    id, name, status: st, desc,
+    symbolSize: 34 + E.filter(e => e[0] === id || e[1] === id).length * 2.2,
+    category: 0,
+    label: { show: true, fontSize: 12, color: '#fff' },
+    itemStyle: { color: DOMAINS[domKey].color, borderColor: STATUS_COLOR[st] || '#888', borderWidth: 3 },
+    tooltip: { formatter: () => `<b>${id} ${name}</b> [${st}]<br>${desc}<br><i style="color:#8aa">点击打开策划案</i>` },
+  }));
+  // 外部代理节点(与该组有关系的每个外部系统一个)
+  const innerIds = new Set(inner.map(n => n.id));
+  const outerIds = new Set();
+  E.forEach(([s, t]) => { if (innerIds.has(s)) outerIds.add(t); if (innerIds.has(t)) outerIds.add(s); });
+  const outers = [...outerIds].filter(id => !innerIds.has(id)).map(id => {
+    const [nid, name, ndom, nst] = nodeOf(id);
+    return { id, name: `${name}(外)`, symbolSize: 16, category: 1, targetDom: ndom,
+      label: { show: true, fontSize: 10, color: '#8899aa' },
+      itemStyle: { color: '#3a3f4b', borderColor: DOMAINS[ndom].color, borderWidth: 1.5 },
+      tooltip: { formatter: () => `<b>${nid} ${name}</b> · ${DOMAINS[ndom].name}(外部)<br><i style="color:#8aa">点击跳转到 ${DOMAINS[ndom].name} 细看,再点该系统打开策划案</i>` } };
+  });
+  const links = E.filter(([s, t]) => innerIds.has(s) || innerIds.has(t)).map(([s, t, ty, desc]) => ({
+    source: s, target: t,
+    lineStyle: { color: LINK_TYPES[ty].color, width: ty === 'loop' ? 2.4 : 1.6, curveness: 0.15, opacity: 0.8 },
+    tooltip: { formatter: () => `<b>${idName(s)} → ${idName(t)}</b><br><span style="color:${LINK_TYPES[ty].color}">[${LINK_TYPES[ty].name}]</span> ${desc}` },
+  }));
+  return {
+    backgroundColor: '#1a1c22',
+    tooltip: { confine: true, backgroundColor: '#23262e', borderColor: '#3a3f4b', textStyle: { color: '#cdd', fontSize: 12 } },
+    legend: [{ data: ['本域系统', '外部关联(代理)'], textStyle: { color: '#cdd' }, top: 8, right: 20 }],
+    series: [{
+      type: 'graph', layout: 'force', roam: true, draggable: true,
+      categories: [{ name: '本域系统' }, { name: '外部关联(代理)' }],
+      nodes: [...inner, ...outers], links,
+      force: { repulsion: 420, edgeLength: [70, 170], gravity: 0.12, friction: 0.25 },
+      emphasis: { focus: 'adjacency', lineStyle: { width: 4, opacity: 1 } },
+      label: { position: 'bottom', distance: 3 },
+      scaleLimit: { min: 0.4, max: 3 },
+    }],
+  };
+}
+
+// ===== 全展开视图(44 系统一图) =====
+function allOption() {
+  const nodes = N.map(([id, name, dom, st, desc]) => ({
+    id, name, status: st, desc,
+    symbolSize: 28 + E.filter(e => e[0] === id || e[1] === id).length * 1.6,
+    category: DOMAIN_KEYS.indexOf(dom),
+    label: { show: true, fontSize: 11, color: '#eee' },
+    itemStyle: { borderColor: STATUS_COLOR[st] || '#888', borderWidth: 3 },
+    tooltip: { formatter: () => `<b>${id} ${name}</b> [${st}] · ${DOMAINS[dom].name}<br>${desc}<br><i style="color:#8aa">点击打开策划案</i>` },
+  }));
+  const links = E.map(([s, t, ty, desc]) => ({
+    source: s, target: t,
+    lineStyle: { color: LINK_TYPES[ty].color, width: ty === 'loop' ? 2.2 : 1.4, curveness: 0.15, opacity: 0.7 },
+    tooltip: { formatter: () => `<b>${idName(s)} → ${idName(t)}</b><br><span style="color:${LINK_TYPES[ty].color}">[${LINK_TYPES[ty].name}]</span> ${desc}` },
+  }));
+  return {
+    backgroundColor: '#1a1c22',
+    tooltip: { confine: true, backgroundColor: '#23262e', borderColor: '#3a3f4b', textStyle: { color: '#cdd', fontSize: 12 } },
+    legend: [{ data: Object.values(DOMAINS).map(d => d.name), textStyle: { color: '#cdd', fontSize: 12 }, top: 8, left: 'center' }],
+    series: [{
+      type: 'graph', layout: 'force', roam: true, draggable: true,
+      categories: Object.values(DOMAINS).map(d => ({ name: d.name, itemStyle: { color: d.color } })),
+      nodes, links,
+      force: { repulsion: 340, edgeLength: [60, 160], gravity: 0.08, friction: 0.25 },
+      emphasis: { focus: 'adjacency', lineStyle: { width: 3.5, opacity: 1 } },
+      label: { position: 'bottom', distance: 3 },
+      scaleLimit: { min: 0.35, max: 3 },
+    }],
+  };
+}
+
+// ===== 视图切换 =====
+const chart = echarts.init(document.getElementById('chart'));
+let view = 'overview';
+function syncButtons() {
+  document.getElementById('backBtn').style.display = view !== 'overview' && view !== 'all' ? 'inline-block' : 'none';
+  document.getElementById('allBtn').textContent = view === 'all' ? '⊞ 分组总览' : '⊘ 全展开';
+}
+function showOverview() {
+  view = 'overview';
+  document.getElementById('breadcrumb').innerHTML = '总览 · 7 域 44 系统 · <i>点击域组下钻(或点右上「全展开」)</i>';
+  document.getElementById('detail').style.display = 'none';
+  syncButtons();
+  chart.setOption(overviewOption(), true);
+}
+function showAll() {
+  view = 'all';
+  document.getElementById('breadcrumb').innerHTML = '<b>全展开</b> · 44 系统一图 · 悬停边看关系 · 点击系统打开策划案 · 顶部图例可按域过滤';
+  document.getElementById('detail').style.display = 'none';
+  syncButtons();
+  chart.setOption(allOption(), true);
+}
+function toggleAll() { view === 'all' ? showOverview() : showAll(); }
+function showGroup(domKey) {
+  view = domKey;
+  const members = N.filter(n => n[2] === domKey);
+  document.getElementById('breadcrumb').innerHTML =
+    `<b>${DOMAINS[domKey].name}</b> · ${members.length} 系统 · 灰色小节点=外部关联(代理,点击跳域)`;
+  document.getElementById('detail').style.display = 'none';
+  syncButtons();
+  chart.setOption(groupOption(domKey), true);
+}
+chart.on('click', p => {
+  if (view === 'overview') {
+    if (p.dataType === 'node' && DOMAIN_KEYS.includes(p.data.id)) showGroup(p.data.id);
+    return;
+  }
+  if (view === 'all') {
+    if (p.dataType === 'node') window.open(postUrl(p.data.id), '_blank');
+    return;
+  }
+  if (p.dataType !== 'node') return;
+  if (p.data.category === 1) {           // 外部代理节点 → 跳转到目标域
+    if (p.data.targetDom) showGroup(p.data.targetDom);
+    return;
+  }
+  window.open(postUrl(p.data.id), '_blank');  // 本域系统 → 打开策划案
+});
+// 详情面板改为按需保留:双击本域节点时显示上下游明细(左键已用于打开策划案)
+chart.on('dblclick', p => {
+  if (view === 'overview' || p.dataType !== 'node' || p.data.category !== 0) return;
+  const d = document.getElementById('detail');
+  const ins = E.filter(e => e[1] === p.data.id).map(e => `← <span style="color:${LINK_TYPES[e[2]].color}">[${LINK_TYPES[e[2]].name}]</span> ${idName(e[0])}:${e[3]}`);
+  const outs = E.filter(e => e[0] === p.data.id).map(e => `→ <span style="color:${LINK_TYPES[e[2]].color}">[${LINK_TYPES[e[2]].name}]</span> ${idName(e[1])}:${e[3]}`);
+  document.getElementById('detailBody').innerHTML =
+    `<b>${p.data.id} ${p.data.name}</b> [${p.data.status}]<br>${p.data.desc}` +
+    `<br><br><b style="color:#8e9aaf">━ 上游(${ins.length})</b><br>${ins.join('<br>') || '无'}` +
+    `<br><br><b style="color:#4aa3df">━ 下游(${outs.length})</b><br>${outs.join('<br>') || '无'}` +
+    `<br><br><i style="color:#8aa">左键单击 = 打开策划案</i>`;
+  d.style.display = 'block';
+});
+window.addEventListener('resize', () => chart.resize());
+showOverview();
+</script>
+</body>
+</html>
