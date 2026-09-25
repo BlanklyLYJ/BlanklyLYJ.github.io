@@ -1,4 +1,5 @@
 ---
+permalink: 2024/08/10/ci-tools-website-ftp-wol/
 title: 小工具集:网站搭建 / FTP / WOL 远程唤醒
 date: 2024-08-10 23:45:00
 updated: 2024-08-10 23:45:00

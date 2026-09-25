@@ -1,4 +1,5 @@
 ---
+permalink: 2024/08/10/config-luban-pipeline-source-binary/
 title: luban 导表体系:配置管线、源码剖析与二进制读取
 date: 2024-08-10 23:30:00
 updated: 2024-08-10 23:30:00

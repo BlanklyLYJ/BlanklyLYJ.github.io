@@ -1,4 +1,5 @@
 ---
+permalink: 2024/08/10/lua-core-table-metatable-oop/
 title: Lua 语言核心:table / metatable / 闭包 / OOP
 date: 2024-08-10 21:00:00
 updated: 2024-08-10 21:00:00

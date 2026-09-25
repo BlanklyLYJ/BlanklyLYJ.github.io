@@ -1,4 +1,5 @@
 ---
+permalink: 2024/04/02/website-building-course/
 title: 网站的开端
 date: 2024-04-02 14:00:05
 updated: 2024-04-08 14:00:05

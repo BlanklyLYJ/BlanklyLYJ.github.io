@@ -1,4 +1,5 @@
 ---
+permalink: 2024/08/10/learning-cs-self-learning-and-skills/
 title: CS 自学路线与编程基础:从语言到工程能力
 date: 2024-08-10 22:30:00
 updated: 2024-08-10 22:30:00

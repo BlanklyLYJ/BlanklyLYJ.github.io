@@ -1,4 +1,5 @@
 ---
+permalink: 2024/08/10/hotfix-solutions-comparison/
 title: 三种热更方案对比:HybridCLR / Lua / ILRuntime
 date: 2024-08-10 22:30:00
 updated: 2024-08-10 22:30:00

@@ -1,4 +1,5 @@
 ---
+permalink: 2024/08/10/datastructure-graph-hashmap-lru/
 title: 图、哈希表与 LRU 缓存:从存储结构到淘汰算法
 date: 2024-08-10 22:30:00
 updated: 2024-08-10 22:30:00

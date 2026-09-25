@@ -1,4 +1,5 @@
 ---
+permalink: 2024/08/10/ai-fsm-behavior-tree-avoidance/
 title: 游戏 AI 决策:FSM 有限状态机与行为树,以及空间数据结构
 date: 2024-08-10 22:30:00
 updated: 2024-08-10 22:30:00

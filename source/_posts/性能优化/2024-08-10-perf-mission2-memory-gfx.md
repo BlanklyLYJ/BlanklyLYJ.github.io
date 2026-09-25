@@ -1,4 +1,5 @@
 ---
+permalink: 2024/08/10/perf-mission2-memory-gfx/
 title: Unity 性能优化(二):内存问题与 Gfx 内存治理
 date: 2024-08-10 19:30:00
 updated: 2024-08-10 19:30:00

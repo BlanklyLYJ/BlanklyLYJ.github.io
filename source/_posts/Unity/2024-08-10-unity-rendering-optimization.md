@@ -1,4 +1,5 @@
 ---
+permalink: 2024/08/10/unity-rendering-optimization/
 title: Unity 渲染优化与 DOTS(DrawCall / 批处理 / JobSystem / SRP)
 date: 2024-08-10 23:30:00
 updated: 2024-08-10 23:30:00

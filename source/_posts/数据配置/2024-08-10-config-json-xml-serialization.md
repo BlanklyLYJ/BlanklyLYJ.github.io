@@ -1,4 +1,5 @@
 ---
+permalink: 2024/08/10/config-json-xml-serialization/
 title: 配置序列化:JSON 与 XML 的语法、解析与选型
 date: 2024-08-10 24:00:00
 updated: 2024-08-10 24:00:00

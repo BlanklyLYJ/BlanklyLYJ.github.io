@@ -1,4 +1,5 @@
 ---
+permalink: 2024/08/10/assetbundle-build-pipeline-manifest-yooasset/
 title: AssetBundle 打包管线、资源清单与 Yooasset 方案
 date: 2024-08-10 23:00:00
 updated: 2024-08-10 23:00:00

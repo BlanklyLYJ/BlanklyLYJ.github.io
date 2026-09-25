@@ -1,4 +1,5 @@
 ---
+permalink: 2024/08/10/hotfix-principle-workflow/
 title: Unity 热更新实战(二):客户端热更原理与打包/分发/加载流程
 date: 2024-08-10 22:30:00
 updated: 2024-08-10 22:30:00

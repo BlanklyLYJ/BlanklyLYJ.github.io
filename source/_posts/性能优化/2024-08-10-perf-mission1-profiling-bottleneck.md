@@ -1,4 +1,5 @@
 ---
+permalink: 2024/08/10/perf-mission1-profiling-bottleneck/
 title: Unity 性能优化(一):定位瓶颈与性能排查工具链
 date: 2024-08-10 19:00:00
 updated: 2024-08-10 19:00:00

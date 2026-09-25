@@ -1,4 +1,5 @@
 ---
+permalink: 2024/08/10/csharp-linq-and-fundamentals/
 title: C# 基础补全:类型 / 集合 / 多态 / LinQ
 date: 2024-08-10 20:00:00
 updated: 2024-08-10 20:00:00

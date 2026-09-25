@@ -1,4 +1,5 @@
 ---
+permalink: 2024/08/10/hotfix-hybridclr-practice/
 title: Unity 热更新实战(一):HybridCLR 接入与 DHE 差分混合执行
 date: 2024-08-10 22:00:00
 updated: 2024-08-10 22:00:00

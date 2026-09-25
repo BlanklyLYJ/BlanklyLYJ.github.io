@@ -1,4 +1,5 @@
 ---
+permalink: 2024/08/10/ci-git-svn-workflow/
 title: 版本控制工作流:Git / SVN / GitHub 实战与常见问题
 date: 2024-08-10 23:00:00
 updated: 2024-08-10 23:00:00

@@ -1,4 +1,5 @@
 ---
+permalink: 2024/08/10/graphic-fundamentals-normal-extraction/
 title: 图形学基础与法线纹理:从渲染管线到法线还原公式
 date: 2024-08-10 23:00:00
 updated: 2024-08-10 23:00:00

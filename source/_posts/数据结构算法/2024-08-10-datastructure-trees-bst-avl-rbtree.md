@@ -1,4 +1,5 @@
 ---
+permalink: 2024/08/10/datastructure-trees-bst-avl-rbtree/
 title: 树结构全家桶:二叉搜索树 / AVL / 红黑树
 date: 2024-08-10 22:00:00
 updated: 2024-08-10 22:00:00

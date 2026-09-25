@@ -1,4 +1,5 @@
 ---
+permalink: 2024/08/10/unity-tips-framework/
 title: Unity 杂项技巧与框架(快捷键 / MVC / UIToolkit / SLG 实战)
 date: 2024-08-10 23:30:00
 updated: 2024-08-10 23:30:00

@@ -1,4 +1,5 @@
 ---
+permalink: 2024/08/10/misc-ai-chatgpt-and-daily-engineering/
 title: 随笔:AI、ChatGPT 与日常工程小记
 date: 2024-08-10 23:30:00
 updated: 2024-08-10 23:30:00

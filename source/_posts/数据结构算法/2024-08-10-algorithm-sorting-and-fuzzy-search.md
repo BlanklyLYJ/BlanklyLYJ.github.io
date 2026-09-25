@@ -1,4 +1,5 @@
 ---
+permalink: 2024/08/10/algorithm-sorting-and-fuzzy-search/
 title: 排序算法与模糊搜索:从快排插排到 KMP 字符串匹配
 date: 2024-08-10 23:00:00
 updated: 2024-08-10 23:00:00

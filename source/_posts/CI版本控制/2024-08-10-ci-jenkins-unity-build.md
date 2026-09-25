@@ -1,4 +1,5 @@
 ---
+permalink: 2024/08/10/ci-jenkins-unity-build/
 title: Jenkins 自动化打包:Unity iOS / Android 全流程
 date: 2024-08-10 23:30:00
 updated: 2024-08-10 23:30:00

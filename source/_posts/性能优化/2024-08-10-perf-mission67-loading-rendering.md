@@ -1,4 +1,5 @@
 ---
+permalink: 2024/08/10/perf-mission67-loading-rendering/
 title: Unity 性能优化(六):加载优化与渲染模块 CPU/GPU 压力
 date: 2024-08-10 21:30:00
 updated: 2024-08-10 21:30:00

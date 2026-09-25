@@ -1,4 +1,5 @@
 ---
+permalink: 2024/08/10/interview-unity-client-essentials/
 title: Unity 客户端面试精选:UI、战斗、性能优化与同步方案
 date: 2024-08-10 21:00:00
 updated: 2024-08-10 21:00:00

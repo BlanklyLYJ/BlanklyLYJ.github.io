@@ -1,4 +1,5 @@
 ---
+permalink: 2024/08/10/design-worldview-dark-act-color-and-planes/
 title: 游戏世界观设定:色彩、位面与心流
 date: 2024-08-10 23:00:00
 updated: 2024-08-10 23:00:00

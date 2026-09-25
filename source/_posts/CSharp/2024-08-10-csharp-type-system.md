@@ -1,4 +1,5 @@
 ---
+permalink: 2024/08/10/csharp-type-system/
 title: C# 类型系统:装箱拆箱、泛型、ref/out、StringBuilder 与深拷贝
 date: 2024-08-10 19:00:00
 updated: 2024-08-10 19:00:00

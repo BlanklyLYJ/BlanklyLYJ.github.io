@@ -1,4 +1,5 @@
 ---
+permalink: 2024/08/10/learning-unity-roadmap-and-tutorials/
 title: Unity 学习路线与教程资源:从入门到进阶的笔记地图
 date: 2024-08-10 22:00:00
 updated: 2024-08-10 22:00:00

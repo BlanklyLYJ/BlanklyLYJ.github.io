@@ -1,4 +1,5 @@
 ---
+permalink: 2024/08/10/sdk-google-login-payment-analytics/
 title: SDK 与平台接入:Google 登录 / 支付 / 数数 / Crasheye
 date: 2024-08-11 00:30:00
 updated: 2024-08-11 00:30:00

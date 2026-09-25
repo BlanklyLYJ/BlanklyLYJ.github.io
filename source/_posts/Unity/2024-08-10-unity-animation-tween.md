@@ -1,4 +1,5 @@
 ---
+permalink: 2024/08/10/unity-animation-tween/
 title: Unity 动画系统(Animator / Animation)与 DoTween
 date: 2024-08-10 23:30:00
 updated: 2024-08-10 23:30:00

@@ -1,4 +1,5 @@
 ---
+permalink: 2024/08/10/unity-android-build-debug/
 title: Unity Android 构建与调试(APK 签名 / IL2CPP / HybridCLR / CICD)
 date: 2024-08-10 23:30:00
 updated: 2024-08-10 23:30:00

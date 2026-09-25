@@ -1,4 +1,5 @@
 ---
+permalink: 2024/08/10/perf-mission3-animation/
 title: Unity 性能优化(三):动画模块耗时治理(Mecanim + Legacy)
 date: 2024-08-10 20:00:00
 updated: 2024-08-10 20:00:00

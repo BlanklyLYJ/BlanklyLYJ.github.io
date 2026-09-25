@@ -1,4 +1,5 @@
 ---
+permalink: 2024/08/10/unity-ugui-advanced/
 title: Unity UGUI 进阶(ScrollRect / Mask / 布局 / Raycaster)
 date: 2024-08-10 23:00:00
 updated: 2024-08-10 23:00:00

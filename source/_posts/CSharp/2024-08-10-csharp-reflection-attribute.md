@@ -1,4 +1,5 @@
 ---
+permalink: 2024/08/10/csharp-reflection-attribute/
 title: C# 反射与特性(Attribute):运行时的元数据魔法
 date: 2024-08-10 19:30:00
 updated: 2024-08-10 19:30:00

@@ -1,4 +1,5 @@
 ---
+permalink: 2024/08/10/assetbundle-fundamentals-build-load-dependency/
 title: Unity AssetBundle 基础:打包、加载与依赖管理
 date: 2024-08-10 22:00:00
 updated: 2024-08-10 22:00:00

@@ -1,4 +1,5 @@
 ---
+permalink: 2024/08/10/slg-tools-framework/
 title: SLG 工具与基础框架:导表 / 合表 / 多语言 / 手游技术栈
 date: 2024-08-10 24:00:00
 updated: 2024-08-10 24:00:00

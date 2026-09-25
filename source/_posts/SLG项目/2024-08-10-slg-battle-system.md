@@ -1,4 +1,5 @@
 ---
+permalink: 2024/08/10/slg-battle-system/
 title: SLG 战斗系统:发起流程 / 选中 / 技能范围 / HUD / 行军线
 date: 2024-08-10 22:00:00
 updated: 2024-08-10 22:00:00

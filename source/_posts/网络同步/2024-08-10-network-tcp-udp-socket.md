@@ -1,4 +1,5 @@
 ---
+permalink: 2024/08/10/network-tcp-udp-socket/
 title: 网络基础:TCP/UDP 协议对比与 Socket 编程
 date: 2024-08-10 22:00:00
 updated: 2024-08-10 22:00:00

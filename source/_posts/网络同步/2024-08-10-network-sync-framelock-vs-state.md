@@ -1,4 +1,5 @@
 ---
+permalink: 2024/08/10/network-sync-framelock-vs-state/
 title: 游戏同步方案:帧同步 vs 状态同步
 date: 2024-08-10 22:30:00
 updated: 2024-08-10 22:30:00

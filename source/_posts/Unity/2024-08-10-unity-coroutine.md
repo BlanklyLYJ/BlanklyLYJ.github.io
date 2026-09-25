@@ -1,4 +1,5 @@
 ---
+permalink: 2024/08/10/unity-coroutine/
 title: Unity 协程(Coroutine / IEnumerator / yield)
 date: 2024-08-10 23:30:00
 updated: 2024-08-10 23:30:00

@@ -1,4 +1,5 @@
 ---
+permalink: 2024/08/10/slg-character-interaction/
 title: SLG 角色与交互:交互物 / 自动扮演 / 移动手感 / 视觉表现
 date: 2024-08-10 23:00:00
 updated: 2024-08-10 23:00:00

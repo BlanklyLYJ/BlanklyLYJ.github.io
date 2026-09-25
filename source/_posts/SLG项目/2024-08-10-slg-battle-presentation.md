@@ -1,4 +1,5 @@
 ---
+permalink: 2024/08/10/slg-battle-presentation/
 title: SLG 战斗表现:技能指示器 / Timeline / 武器拖尾 / 子弹时间
 date: 2024-08-10 24:30:00
 updated: 2024-08-10 24:30:00

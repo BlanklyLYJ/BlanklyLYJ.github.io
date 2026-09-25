@@ -1,4 +1,5 @@
 ---
+permalink: 2024/08/10/perf-mission4-physics/
 title: Unity 性能优化(四):物理模块耗时治理(PhysX)
 date: 2024-08-10 20:30:00
 updated: 2024-08-10 20:30:00

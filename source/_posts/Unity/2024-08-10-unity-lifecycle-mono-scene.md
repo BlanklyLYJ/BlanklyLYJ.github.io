@@ -1,4 +1,5 @@
 ---
+permalink: 2024/08/10/unity-lifecycle-mono-scene/
 title: Unity 生命周期、MonoBehaviour 与场景管理
 date: 2024-08-10 22:00:00
 updated: 2024-08-10 22:00:00

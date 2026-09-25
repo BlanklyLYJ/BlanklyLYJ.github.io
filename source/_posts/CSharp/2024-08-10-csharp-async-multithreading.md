@@ -1,4 +1,5 @@
 ---
+permalink: 2024/08/10/csharp-async-multithreading/
 title: C# 异步编程与多线程(Thread / ThreadPool / Task / async·await)
 date: 2024-08-10 18:30:00
 updated: 2024-08-10 18:30:00

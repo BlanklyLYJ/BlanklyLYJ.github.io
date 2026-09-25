@@ -1,4 +1,5 @@
 ---
+permalink: 2024/08/10/slg-map-scene/
 title: SLG 地图与场景:建造系统 / 场景切换 / RTS 视角控制
 date: 2024-08-10 23:30:00
 updated: 2024-08-10 23:30:00

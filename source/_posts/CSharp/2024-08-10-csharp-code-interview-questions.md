@@ -1,4 +1,5 @@
 ---
+permalink: 2024/08/10/csharp-code-interview-questions/
 title: C# 面试题精选:执行顺序、内存陷阱、装箱识别
 date: 2024-08-10 20:30:00
 updated: 2024-08-10 20:30:00

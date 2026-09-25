@@ -1,4 +1,5 @@
 ---
+permalink: 2024/08/10/pathfinding-algorithms-overview/
 title: 游戏寻路算法全家桶:从 BFS/DFS 到 A*/JPS/NavMesh/流场/漏斗
 date: 2024-08-10 22:00:00
 updated: 2024-08-10 22:00:00

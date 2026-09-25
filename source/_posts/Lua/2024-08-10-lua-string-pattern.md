@@ -1,4 +1,5 @@
 ---
+permalink: 2024/08/10/lua-string-pattern/
 title: Lua 字符串与模式匹配:不是正则,但够用
 date: 2024-08-10 21:30:00
 updated: 2024-08-10 21:30:00

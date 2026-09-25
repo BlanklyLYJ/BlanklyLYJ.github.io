@@ -1,4 +1,5 @@
 ---
+permalink: 2024/08/10/csharp-delegate-event/
 title: C# 委托体系:委托、事件、匿名方法与 Lambda
 date: 2024-08-10 18:00:00
 updated: 2024-08-10 18:00:00

@@ -1,4 +1,5 @@
 ---
+permalink: 2024/08/10/sdk-ios-android-apk-signing/
 title: iOS / Android 平台须知与 APK / IPA 签名
 date: 2024-08-11 01:00:00
 updated: 2024-08-11 01:00:00

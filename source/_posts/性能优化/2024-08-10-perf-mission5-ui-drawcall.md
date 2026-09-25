@@ -1,4 +1,5 @@
 ---
+permalink: 2024/08/10/perf-mission5-ui-drawcall/
 title: Unity 性能优化(五):UI 热点函数与 DrawCall 优化
 date: 2024-08-10 21:00:00
 updated: 2024-08-10 21:00:00

@@ -1,4 +1,5 @@
 ---
+permalink: 2024/08/10/config-flowcanvas-visual-scripting/
 title: FlowCanvas 与可视化流程编排:配置驱动的关卡系统
 date: 2024-08-10 24:30:00
 updated: 2024-08-10 24:30:00

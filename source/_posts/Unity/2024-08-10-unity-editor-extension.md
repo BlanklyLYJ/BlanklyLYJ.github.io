@@ -1,4 +1,5 @@
 ---
+permalink: 2024/08/10/unity-editor-extension/
 title: Unity Editor 扩展(EditorWindow / Inspector / 工具)
 date: 2024-08-10 23:30:00
 updated: 2024-08-10 23:30:00

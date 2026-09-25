@@ -1,4 +1,5 @@
 ---
+permalink: 2024/08/10/assetbundle-framework-loader-module-pool/
 title: AssetBundle 框架设计:Loader / Module / Pool 三件套
 date: 2024-08-10 22:30:00
 updated: 2024-08-10 22:30:00

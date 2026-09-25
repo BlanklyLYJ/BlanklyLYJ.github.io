@@ -1,4 +1,5 @@
 ---
+permalink: 2024/08/10/unity-ugui-basics/
 title: Unity UGUI 基础组件(Canvas / Image / Text / TextMeshPro)
 date: 2024-08-10 22:30:00
 updated: 2024-08-10 22:30:00

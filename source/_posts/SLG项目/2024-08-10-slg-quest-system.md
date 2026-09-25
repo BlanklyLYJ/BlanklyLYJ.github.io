@@ -1,4 +1,5 @@
 ---
+permalink: 2024/08/10/slg-quest-system/
 title: SLG 任务系统:condition / 引导 / 红点树 / 宝箱 / 刷怪触发器
 date: 2024-08-10 22:30:00
 updated: 2024-08-10 22:30:00

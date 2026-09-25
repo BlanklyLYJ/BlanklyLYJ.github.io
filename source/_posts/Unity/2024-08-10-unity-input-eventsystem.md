@@ -1,4 +1,5 @@
 ---
+permalink: 2024/08/10/unity-input-eventsystem/
 title: Unity 输入与交互(Input / EventSystem / Pointer)
 date: 2024-08-10 23:30:00
 updated: 2024-08-10 23:30:00

@@ -1,4 +1,5 @@
 ---
+permalink: 2024/08/10/interview-xishanji-tps-experience/
 title: 西山居解限机面试复盘:从 SLG 跨到 TPS 的真实经历
 date: 2024-08-10 21:30:00
 updated: 2024-08-10 21:30:00

@@ -1,4 +1,5 @@
 ---
+permalink: 2024/08/10/xlua-integration-codegen-gotchas/
 title: XLua 集成:三大标签 / LuaEnv / GC 机制 / 判 nil 坑
 date: 2024-08-10 22:00:00
 updated: 2024-08-10 22:00:00

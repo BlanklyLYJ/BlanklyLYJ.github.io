@@ -1,4 +1,5 @@
 ---
+permalink: 2024/08/10/shader-postprocessing-glitch-bezier-blue-protocol/
 title: 风格化后处理与曲线:Glitch Art / Bezier / 蓝色协议
 date: 2024-08-10 23:30:00
 updated: 2024-08-10 23:30:00
