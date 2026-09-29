@@ -268,4 +268,4 @@ public class RenderEntity : MonoBehaviour
 
 ---
 
-下一篇:[版本控制工作流:Git / SVN / GitHub 实战与常见问题](2024-08-10-ci-git-svn-workflow.md) — 整合自 12 篇 Git / SVN / Hook 笔记。
+下一篇:[版本控制工作流:Git / SVN / GitHub 实战与常见问题](/2024/08/10/ci-git-svn-workflow/) — 整合自 12 篇 Git / SVN / Hook 笔记。

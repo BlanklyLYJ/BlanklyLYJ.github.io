@@ -273,4 +273,4 @@ ftp.quit()
 
 ---
 
-下一篇:[SDK 与平台接入:Google 登录 / 支付 / 数数 / Crasheye](2024-08-10-sdk-google-login-payment-analytics.md) — 整合自 SDK 接入的八篇笔记。
+下一篇:[SDK 与平台接入:Google 登录 / 支付 / 数数 / Crasheye](/2024/08/10/sdk-google-login-payment-analytics/) — 整合自 SDK 接入的八篇笔记。

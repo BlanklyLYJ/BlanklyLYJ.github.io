@@ -362,4 +362,4 @@ public void MergeExcel(string folderPath, string masterFileName)
 
 ---
 
-下一篇:[C# 异步编程与多线程(async/await、Task、Thread)](@post/2024-08-10-csharp-async-multithreading) — 配合本篇的热更 / 网络框架阅读。
+下一篇:[C# 异步编程与多线程(async/await、Task、Thread)](/2024/08/10/csharp-async-multithreading/) — 配合本篇的热更 / 网络框架阅读。
