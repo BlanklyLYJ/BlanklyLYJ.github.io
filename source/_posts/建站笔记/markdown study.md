@@ -13,6 +13,8 @@ comments: true
 
 >[试写网站:stackedit.io/app](https://stackedit.io/app#)
 
+<!-- more -->
+
 # 1.文字内容书写
 ## 1.0 分割线
 在空行出输入三个星号 *** 即可画出分割线，例如

@@ -14,7 +14,8 @@ menu:
    归档: /archives/ || fas fa-archive
    标签: /tags/ || fas fa-tags
    分类: /categories/ || fas fa-folder-open
-   独游系统拆解: /categories/游戏策划/独游系统拆解/ || fas fa-cogs
+   系统拆解||fas fa-cogs:
+     维尔德拉斯传说: /categories/游戏策划/系统拆解/维尔德拉斯传说/ || fas fa-dragon
    列表||fas fa-list:
      音乐: /music/ || fas fa-music
      电影: /movies/ || fas fa-video

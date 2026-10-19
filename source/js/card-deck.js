@@ -266,6 +266,9 @@
   // ============ 键盘左右箭头 ============
   document.addEventListener('keydown', function (e) {
     if (!deckMode) return
+    // 焦点在输入框(如搜索框)时方向键留给光标,不切牌
+    var t = e.target
+    if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.tagName === 'SELECT' || t.isContentEditable)) return
     if (e.key === 'ArrowLeft' && selectedIndex > 0) {
       selectedIndex--
       expanded ? render() : collapse()
